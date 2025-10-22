@@ -1,24 +1,44 @@
-# README
+# ジスイーズ
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## サイト概要
+### サイトテーマ
 
-Things you may want to cover:
+- タグ付けされた食材からレシピを検索したり、自分の作った自炊料理を投稿できるSNS
+​
+### テーマを選んだ理由
 
-* Ruby version
+一人暮らしで、狭いキッチンなどで自炊を日々頑張っている方々は作る料理も１品だけの方も多くいらっしゃると思います。  
+日々、検索サイトで投稿されているレシピは、対象が世帯や２人以上になっており、私自身も頑張って自炊を行っても、どうしても食材が余ってしまい、無駄にしてしまうことが多々ありました。  
+また、作る料理もワンパターンになり、自炊も毎日行うのは辛いと思う日
+もあったため、『食材』からレシピを検索できたり、また一人暮らしでの自炊で同じような悩みの持つ人が、他の人がどのような料理を作っているのかを共有できるSNSがあれば、日々の自炊も頑張れるのではないかと思い、このようなSNSを制作してみようと考えました。
 
-* System dependencies
+### ターゲットユーザ
+- 一人暮らしで自炊を頑張りたいと思っている人
 
-* Configuration
+- 余っている食材から、料理を作りたいと考えている人
 
-* Database creation
+- 毎日作っている料理がワンパターンになっていて悩んでいる人
+​
+### 主な利用シーン
+- 『食材』からレシピを検索したい時
 
-* Database initialization
+- 自分の作った料理を投稿したい時
 
-* How to run the test suite
+- お気に入りのフォロアーの料理を検索したい時 
+​
+## 設計書
+後ほど作成予定
+​
+## 開発環境
+- OS：Windows
+- 言語：HTML,CSS,JavaScript,Ruby,SQL
+- フレームワーク：Ruby on Rails
+- JSライブラリ：jQuery
+- IDE：Visual Studio Code（VSCode）
+​
+## 使用素材
+・フリー写真素材として以下を使用
+　　　Pixels(https://www.pexels.com/ja-jp/)
 
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+著作権を考慮し、架空のデータを扱う予定です。 
+なお今後、実在するデータを利用する際には、事前に著作権保持者と契約を結んだ上で利用します。 
