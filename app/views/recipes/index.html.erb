@@ -1,0 +1,17 @@
+<h1>レシピ一覧</h1>
+
+<% if user_signed_in? %>
+  <%= link_to "新規レシピ投稿", new_recipe_path %>
+<% end %>
+
+
+<% @recipes.each do |recipe| %>
+  <div style="margin-bottom:20px;">
+    <% if recipe.image.attached? %>
+      <%= image_tag recipe.image, width: 200 %>
+    <% end %>
+
+    <h2><%= link_to recipe.title, recipe_path(recipe) %></h2>
+    <p><%= truncate(recipe.body, length: 80) %></p>
+  </div>
+<% end %>
