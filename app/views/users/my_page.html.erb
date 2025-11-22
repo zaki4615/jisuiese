@@ -1,0 +1,10 @@
+<h1><%= @user.name %> さんのマイページ</h1>
+
+<h2>あなたの投稿一覧</h2>
+<ul>
+  <% @recipes.each do |recipe| %>
+    <li><%= link_to recipe.title, recipe_path(recipe) %></li>
+  <% end %>
+</ul>
+
+<%= link_to "プロフィール編集", edit_user_path(@user) %>
