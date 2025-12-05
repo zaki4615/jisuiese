@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   before_action :authenticate_user!
-
+  before_action :correct_user, only: [:edit, :update, :destroy]
   # /users/my_page
   def my_page
     @user = current_user
@@ -33,6 +33,12 @@ class UsersController < ApplicationController
   end
 
   private
+
+  def correct_user
+    unless @user == current_user
+      redirect_to my_page_path, alert: "不正なアクセスです"
+    end
+  end
 
   def user_params
     params.require(:user).permit(:name, :email)
