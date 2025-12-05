@@ -6,7 +6,7 @@
 
 <p><%= @recipe.body %></p>
 
-<p>投稿者：<%= @recipe.user.email %></p>
+<p>投稿者：<%= link_to @recipe.user.name, user_path(@recipe.user) %></p>
 
 <% if user_signed_in? && @recipe.user == current_user %>
   <%= link_to "編集", edit_recipe_path(@recipe) %> |
