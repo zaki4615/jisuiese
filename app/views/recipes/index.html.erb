@@ -16,7 +16,11 @@
     <p>投稿者：
       <%= link_to recipe.user.name, user_path(recipe.user) %>
     </p>
-    
+
+    <p>コメント数：<%= recipe.comments.count %></p>
+
+    <p>投稿者の総コメント数：<%= recipe.user.comments.count %></p>
+
     <p><%= truncate(recipe.body, length: 80) %></p>
   </div>
 <% end %>
