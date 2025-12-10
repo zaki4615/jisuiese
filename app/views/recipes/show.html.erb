@@ -17,38 +17,38 @@
 
 <%= link_to "一覧へ戻る", recipes_path %>
 
+<hr>
+
+
+<!-- 🔥 コメント一覧 -->
+
+<h2>コメント一覧</h2>
+
+<% @recipe.comments.each do |comment| %>
+  <div style="margin-bottom: 10px;">
+    <strong><%= comment.user.name %>：</strong>
+    <%= comment.body %>
+
+    <% if comment.user == current_user %>
+      <%= link_to "削除", recipe_comment_path(@recipe, comment),
+          method: :delete,
+          data: { confirm: "本当に削除しますか？" } %>
+    <% end %>
+  </div>
+<% end %>
 
 <hr>
 
-<h2>画像・内容の編集</h2>
 
-<%= form_with model: @recipe, local: true, html: { multipart: true } do |f| %>
+<!--  コメント投稿フォーム -->
 
-  <% if @recipe.errors.any? %>
-    <div class="errors">
-      <h3><%= pluralize(@recipe.errors.count, "件のエラー") %>があります</h3>
-      <ul>
-        <% @recipe.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
-        <% end %>
-      </ul>
-    </div>
+<h3>コメントを投稿する</h3>
+
+<% if user_signed_in? %>
+  <%= form_with model: [@recipe, Comment.new], local: true do |f| %>
+    <%= f.text_area :body, rows: 3 %><br>
+    <%= f.submit "コメントする" %>
   <% end %>
-
-  <div>
-    <%= f.label :image, "画像" %><br>
-    <%= f.file_field :image %>
-  </div>
-
-  <div>
-    <%= f.label :title, "レシピ名" %><br>
-    <%= f.text_field :title %>
-  </div>
-
-  <div>
-    <%= f.label :body, "作り方" %><br>
-    <%= f.text_area :body %>
-  </div>
-
-  <%= f.submit "保存する" %>
+<% else %>
+  <p>コメントするには <%= link_to "ログイン", new_user_session_path %> してください。</p>
 <% end %>
