@@ -1,0 +1,26 @@
+<h1>検索結果</h1>
+
+<p>検索対象：<%= @model %></p>
+<p>キーワード：<%= @keyword %></p>
+
+<hr>
+
+<% if @results.any? %>
+  <% @results.each do |result| %>
+
+    <% if @model == "user" %>
+      <p>
+        ユーザー名：<%= link_to result.name, user_path(result) %>
+      </p>
+
+    <% elsif @model == "recipe" %>
+      <p>
+        レシピ：<%= link_to result.title, recipe_path(result) %>
+      </p>
+
+    <% end %>
+
+  <% end %>
+<% else %>
+  <p>一致するデータはありませんでした。</p>
+<% end %>
