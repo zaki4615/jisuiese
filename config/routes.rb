@@ -1,6 +1,15 @@
 Rails.application.routes.draw do
+
+
+  devise_for :admins, path: 'admin', controllers: {
+  sessions: "admin/sessions"
+  }
+
+  namespace :admin do
+   resources :users, only: [:index, :show, :destroy]
+  end
   
-  get 'search/search'
+  
   devise_for :users
   root to: 'homes#top'
   get "home/about" => "homes#about", as: 'about'

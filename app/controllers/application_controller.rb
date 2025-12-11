@@ -7,8 +7,12 @@ class ApplicationController < ActionController::Base
     my_page_path
   end
 
-  def after_sign_up_path_for(resource)
-    my_page_path
+  def after_sign_in_path_for(resource)
+    if resource.is_a?(Admin)
+      admin_users_path    
+    else
+      my_page_path        
+    end
   end
 
   def after_sign_out_path_for(resource_or_scope)
