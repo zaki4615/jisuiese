@@ -31,7 +31,14 @@
           <li><%= link_to "Home", root_path %></li>
           <li><%= link_to "About", about_path %></li>
           <li><%= link_to "レシピ一覧", recipes_path %></li>
-         <% if user_signed_in? %>
+
+         <% if admin_signed_in? %> 
+          <!-- 管理者ログイン後の表示 -->
+          <li><%= link_to "管理者ユーザー一覧", admin_users_path %></li>
+          <li><%= button_to "管理者ログアウト", destroy_admin_session_path, method: :delete %></li>
+
+          
+         <% elsif user_signed_in? %>
           <!-- ログイン後の表示 -->
           <li><%= link_to "新規投稿", new_recipe_path %></li>
           <li><%= link_to "マイページ", my_page_path %></li>
