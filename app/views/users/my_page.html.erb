@@ -1,12 +1,38 @@
 <div class="container mt-4">
+
+  <!-- プロフィール -->
+  <div class="card mb-4">
+    <div class="card-body text-center">
+
+      <% if @user.profile_image.attached? %>
+        <%= image_tag @user.profile_image,
+              class: "rounded-circle mb-3",
+              size: "120x120" %>
+      <% else %>
+        <%= image_tag "default_user.png",
+              class: "rounded-circle mb-3",
+              size: "120x120" %>
+      <% end %>
+
+      <h4 class="mb-1"><%= @user.name %></h4>
+
+      <% if @user.introduction.present? %>
+        <p class="text-muted small mt-2">
+          <%= simple_format(@user.introduction) %>
+        </p>
+      <% end %>
+
+    </div>
+  </div>
+
   <div class="row">
 
     <!-- 左：ユーザー情報 -->
     <div class="col-md-4 mb-4">
       <div class="card sticky-top" style="top: 80px;">
         <div class="card-body text-center">
-          <h3 class="card-title"><%= @user.name %></h3>
-          <p class="text-muted"><%= @user.email %></p>
+
+          <p class="text-muted small"><%= @user.email %></p>
 
           <hr>
 
@@ -15,15 +41,15 @@
           </p>
 
           <%= link_to "プロフィール編集",
-                      edit_user_path(@user),
-                      class: "btn btn-outline-primary btn-sm mt-2" %>
+                edit_user_path(@user),
+                class: "btn btn-outline-primary btn-sm mt-3" %>
         </div>
       </div>
     </div>
 
     <!-- 右：投稿一覧 -->
     <div class="col-md-8">
-      <h4 class="mb-3">あなたの投稿</h4>
+      <h4 class="mb-3">投稿一覧</h4>
 
       <% if @recipes.any? %>
         <div class="row">
@@ -33,18 +59,18 @@
 
                 <% if recipe.image.attached? %>
                   <%= image_tag recipe.image,
-                                class: "card-img-top",
-                                style: "height:180px; object-fit:cover;" %>
+                        class: "card-img-top",
+                        style: "height:180px; object-fit:cover;" %>
                 <% end %>
 
                 <div class="card-body">
                   <h5 class="card-title">
                     <%= link_to recipe.title,
-                                recipe_path(recipe),
-                                class: "text-decoration-none" %>
+                          recipe_path(recipe),
+                          class: "text-decoration-none" %>
                   </h5>
 
-                  <p class="card-text text-muted">
+                  <p class="card-text text-muted small">
                     <%= truncate(recipe.body, length: 80) %>
                   </p>
                 </div>

@@ -6,6 +6,8 @@ class User < ApplicationRecord
 
   has_many :recipes, dependent: :destroy  
   has_many :comments, dependent: :destroy 
+
+  has_one_attached :profile_image
   
   validates :name, presence: true      
   

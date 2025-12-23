@@ -1,32 +1,76 @@
-<h1>ユーザー情報編集</h1>
+<div class="container mt-5" style="max-width: 600px;">
+  <div class="card shadow-sm">
+    <div class="card-body">
 
-<%= form_with model: @user, local: true do |f| %>
+      <h3 class="card-title mb-4 text-center">ユーザー情報編集</h3>
 
-  <% if @user.errors.any? %>
-    <div class="errors">
-      <% @user.errors.full_messages.each do |msg| %>
-        <p><%= msg %></p>
+      <%= form_with model: @user, local: true do |f| %>
+
+        <% if @user.errors.any? %>
+          <div class="alert alert-danger">
+            <ul class="mb-0">
+              <% @user.errors.full_messages.each do |msg| %>
+                <li><%= msg %></li>
+              <% end %>
+            </ul>
+          </div>
+        <% end %>
+
+        <!-- プロフィール画像 -->
+        <div class="mb-3 text-center">
+          <% if @user.profile_image.attached? %>
+            <%= image_tag @user.profile_image,
+                  class: "rounded-circle mb-2",
+                  size: "120x120" %>
+          <% end %>
+
+          <%= f.label :profile_image, "プロフィール画像", class: "form-label d-block" %>
+          <%= f.file_field :profile_image, class: "form-control" %>
+        </div>
+
+        <!-- 氏名 -->
+        <div class="mb-3">
+          <%= f.label :name, "氏名", class: "form-label" %>
+          <%= f.text_field :name, class: "form-control" %>
+        </div>
+
+        <!-- メールアドレス -->
+        <div class="mb-3">
+          <%= f.label :email, "メールアドレス", class: "form-label" %>
+          <%= f.email_field :email, class: "form-control" %>
+        </div>
+
+        <!-- 自己紹介 -->
+        <div class="mb-3">
+          <%= f.label :introduction, "自己紹介", class: "form-label" %>
+          <%= f.text_area :introduction,
+                rows: 4,
+                class: "form-control",
+                placeholder: "簡単な自己紹介を書いてください" %>
+        </div>
+
+        <div class="d-grid">
+          <%= f.submit "更新する", class: "btn btn-primary" %>
+        </div>
+
       <% end %>
     </div>
-  <% end %>
-
-  <div>
-    <%= f.label :name, "氏名" %><br>
-    <%= f.text_field :name %>
   </div>
 
-  <div>
-    <%= f.label :email, "メールアドレス" %><br>
-    <%= f.email_field :email %>
+  <!-- 退会カード -->
+  <div class="card border-danger mt-4">
+    <div class="card-body text-center">
+      <h5 class="text-danger mb-3">退会</h5>
+
+      <p class="text-muted small">
+        退会すると、投稿データもすべて削除されます。
+      </p>
+
+      <%= button_to "退会する",
+            user_path(@user),
+            method: :delete,
+            data: { confirm: "本当に退会しますか？" },
+            class: "btn btn-outline-danger" %>
+    </div>
   </div>
-
-  <%= f.submit "更新する" %>
-<% end %>
-
-<hr>
-
-<h2>退会</h2>
-
-<%= button_to "退会する", user_path(@user),
-      method: :delete,
-      data: { confirm: "本当に退会しますか？" } %>
+</div>
