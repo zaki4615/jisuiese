@@ -1,2 +1,30 @@
-<h1>Homes#top</h1>
-<p>Find me in app/views/homes/top.html.erb</p>
+<div class="container">
+
+  <!-- ヒーローエリア -->
+  <div class="row justify-content-center text-center mt-5 mb-5">
+    <div class="col-lg-8">
+
+      <h1 class="fw-bold mb-4">
+        一人暮らしの自炊を、<br class="d-none d-md-block">
+        もっと楽しく。
+      </h1>
+
+      <p class="lead text-muted mb-4">
+        余りがちな食材からレシピを検索したり、<br>
+        自分の自炊料理を投稿・共有できる<br class="d-none d-md-block">
+        一人暮らし向けレシピSNSです。
+      </p>
+
+      <div class="d-flex justify-content-center gap-3 mt-4">
+        <%= link_to "レシピを見る",
+              recipes_path,
+              class: "btn btn-primary btn-lg px-4" %>
+
+        <% unless user_signed_in? %>
+          <%= link_to "無料ではじめる",
+                new_user_registration_path,
+                class: "btn btn-outline-secondary btn-lg px-4" %>
+        <% end %>
+      </div>
+
+  
