@@ -6,52 +6,16 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
-    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_link_tag 'application', media: 'all' %>
+    <%= javascript_pack_tag 'application' %>
   </head>
 
   <body>
-    <header>
-     
-     <nav>
-      <% if user_signed_in? %>
-        <div class="search-box" style="margin: 10px 0;">
-          <%= form_with url: search_path, method: :get, local: true do |f| %>
+    <%= render 'layouts/header' %>
 
-            <%= f.select :model, [["ユーザー", "user"], ["レシピ", "recipe"]] %>
-
-            <%= f.text_field :keyword, placeholder: "検索キーワード" %>
-
-            <%= f.submit "検索" %>
-
-        <% end %>
-      </div>
-    <% end %>
-       <ul>
-          <li><%= link_to "Home", root_path %></li>
-          <li><%= link_to "About", about_path %></li>
-          <li><%= link_to "レシピ一覧", recipes_path %></li>
-
-         <% if admin_signed_in? %> 
-          <!-- 管理者ログイン後の表示 -->
-          <li><%= link_to "管理者ユーザー一覧", admin_users_path %></li>
-          <li><%= button_to "管理者ログアウト", destroy_admin_session_path, method: :delete %></li>
-
-          
-         <% elsif user_signed_in? %>
-          <!-- ログイン後の表示 -->
-          <li><%= link_to "新規投稿", new_recipe_path %></li>
-          <li><%= link_to "マイページ", my_page_path %></li>
-          <li><%= button_to "ログアウト", destroy_user_session_path, method: :delete %></li>
-         <% else %>
-         <!-- ログイン前の表示 -->
-          <li><%= link_to "新規登録", new_user_registration_path %></li>
-          <li><%= link_to "ログイン", new_user_session_path %></li>
-         <% end %>
-        </ul>
-      </nav>
-     <%= render 'layouts/notifications' %>  
-     <%= yield %>
-    </header>
-</body>
+    <div class="container mt-4">
+      <%= render 'layouts/notifications' %>
+      <%= yield %>
+    </div>
+  </body>
 </html>

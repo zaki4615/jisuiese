@@ -1,0 +1,58 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <div class="container">
+
+    
+    <%= link_to "Jisuiese", root_path, class: "navbar-brand" %>
+
+    
+    <ul class="navbar-nav ms-auto align-items-center">
+
+      
+      <% if user_signed_in? %>
+        <li class="nav-item me-3">
+          <%= form_with url: search_path,
+                        method: :get,
+                        local: true,
+                        class: "d-flex" do |f| %>
+
+            <%= f.select :model,
+                  [["ユーザー", "user"], ["レシピ", "recipe"]],
+                  {},
+                  class: "form-select form-select-sm me-2" %>
+
+            <%= f.text_field :keyword,
+                  placeholder: "検索",
+                  class: "form-control form-control-sm me-2" %>
+
+            <%= f.submit "検索",
+                  class: "btn btn-outline-light btn-sm" %>
+          <% end %>
+        </li>
+      <% end %>
+
+      
+      <li class="nav-item">
+        <%= link_to "レシピ一覧", recipes_path, class: "nav-link" %>
+      </li>
+
+      <% if user_signed_in? %>
+        <li class="nav-item ms-3">
+          <%= link_to "新規投稿", new_recipe_path, class: "nav-link" %>
+        </li>
+
+        <li class="nav-item">
+          <%= link_to "マイページ", my_page_path, class: "nav-link" %>
+        </li>
+
+        <li class="nav-item ms-2">
+          <%= button_to "ログアウト",
+                destroy_user_session_path,
+                method: :delete,
+                class: "btn btn-outline-light btn-sm",
+                form_class: "d-inline" %>
+        </li>
+      <% end %>
+
+    </ul>
+  </div>
+</nav>
