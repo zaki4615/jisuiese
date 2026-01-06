@@ -1,14 +1,21 @@
 class SearchController < ApplicationController
-  before_action :authenticate_user!
-
   def search
     @model = params[:model]
     @keyword = params[:keyword]
 
-    if @model == "user"
+    if @model == "recipe"
+      
+      @results = Recipe.joins(:tags)
+                       .left_joins(:tags)
+                       .where(
+                             "recipes.title LIKE :q
+                              OR recipes.body LIKE :q
+                              OR tags.name LIKE :q",
+                             q: "%#{@keyword}%"
+                        )
+                       .distinct
+    elsif @model == "user"
       @results = User.where("name LIKE ?", "%#{@keyword}%")
-    elsif @model == "recipe"
-      @results = Recipe.where("title LIKE ? OR body LIKE ?", "%#{@keyword}%", "%#{@keyword}%")
     else
       @results = []
     end

@@ -1,52 +1,50 @@
 <h1>検索結果</h1>
 
-<p>検索対象：<%= @model %></p>
-<p>キーワード：<%= @keyword %></p>
+<p class="text-muted">
+  検索対象：<%= @model %> ／ キーワード：<%= @keyword %>
+</p>
 
 <hr>
 
 <% if @results.any? %>
+
   <% @results.each do |result| %>
 
-    <% if @model == "user" %>
-      <div class="card mb-3 p-3">
-        <div class="d-flex justify-content-between align-items-center">
+    <% if @model == "recipe" %>
+      <div class="card mb-3">
+        <div class="card-body">
 
-          <div>
-            ユーザー名：
-            <%= link_to result.name, user_path(result) %>
-          </div>
+          <h5>
+            <%= link_to result.title, recipe_path(result) %>
+          </h5>
 
-          <% if user_signed_in? %>
-            <%= render "users/follow_button", user: result %>
-          <% end %>
-
-        </div>
-      </div>
-
-    <% elsif @model == "recipe" %>
-      <div class="card mb-3 p-3">
-
-        <h5>
-          レシピ：
-          <%= link_to result.title, recipe_path(result) %>
-        </h5>
-
-        <div class="d-flex justify-content-between align-items-center mt-2">
-          <small class="text-muted">
+          <p class="text-muted small">
             投稿者：
             <%= link_to result.user.name, user_path(result.user) %>
-          </small>
+          </p>
 
-          <% if user_signed_in? %>
-            <%= render "users/follow_button", user: result.user %>
+          <% if result.tags.any? %>
+            <div class="mt-2">
+              <% result.tags.each do |tag| %>
+                <%= link_to "##{tag.name}",
+                      search_path(model: "recipe", keyword: tag.name),
+                      class: "badge bg-secondary me-1 text-decoration-none" %>
+              <% end %>
+            </div>
           <% end %>
-        </div>
 
+        </div>
       </div>
+
+    <% elsif @model == "user" %>
+      <p>
+        ユーザー名：
+        <%= link_to result.name, user_path(result) %>
+      </p>
     <% end %>
 
   <% end %>
+
 <% else %>
   <p>一致するデータはありませんでした。</p>
 <% end %>
