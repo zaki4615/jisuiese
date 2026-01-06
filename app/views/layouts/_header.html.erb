@@ -16,12 +16,12 @@
                         class: "d-flex" do |f| %>
 
             <%= f.select :model,
-                  [["ユーザー", "user"], ["レシピ", "recipe"]],
+                  [["レシピ", "recipe"], ["ユーザー", "user"]],
                   {},
                   class: "form-select form-select-sm me-2" %>
 
             <%= f.text_field :keyword,
-                  placeholder: "検索",
+                  placeholder: "食材、レシピ",
                   class: "form-control form-control-sm me-2" %>
 
             <%= f.submit "検索",
