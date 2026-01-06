@@ -17,6 +17,11 @@
       <%= link_to recipe.user.name, user_path(recipe.user) %>
     </p>
 
+    <% if user_signed_in? %>
+      <%= render "users/follow_button", user: recipe.user %>
+    <% end %>
+
+
     <p>コメント数：<%= recipe.comments.count %></p>
 
     <p>投稿者の総コメント数：<%= recipe.user.comments.count %></p>

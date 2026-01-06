@@ -9,15 +9,41 @@
   <% @results.each do |result| %>
 
     <% if @model == "user" %>
-      <p>
-        ユーザー名：<%= link_to result.name, user_path(result) %>
-      </p>
+      <div class="card mb-3 p-3">
+        <div class="d-flex justify-content-between align-items-center">
+
+          <div>
+            ユーザー名：
+            <%= link_to result.name, user_path(result) %>
+          </div>
+
+          <% if user_signed_in? %>
+            <%= render "users/follow_button", user: result %>
+          <% end %>
+
+        </div>
+      </div>
 
     <% elsif @model == "recipe" %>
-      <p>
-        レシピ：<%= link_to result.title, recipe_path(result) %>
-      </p>
+      <div class="card mb-3 p-3">
 
+        <h5>
+          レシピ：
+          <%= link_to result.title, recipe_path(result) %>
+        </h5>
+
+        <div class="d-flex justify-content-between align-items-center mt-2">
+          <small class="text-muted">
+            投稿者：
+            <%= link_to result.user.name, user_path(result.user) %>
+          </small>
+
+          <% if user_signed_in? %>
+            <%= render "users/follow_button", user: result.user %>
+          <% end %>
+        </div>
+
+      </div>
     <% end %>
 
   <% end %>
