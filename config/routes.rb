@@ -19,4 +19,13 @@ Rails.application.routes.draw do
   end
   resources :users, only: [:show, :edit, :update, :destroy]
   get "search", to: "search#search"
+
+  resources :relationships, only: [:create, :destroy]
+
+  resources :users do
+   member do
+     get :following
+     get :followers
+   end
+  end 
 end
